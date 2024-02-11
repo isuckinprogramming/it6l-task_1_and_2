@@ -9,13 +9,12 @@ $connection = new mysqli("localhost", "root", "", "IT6LDB");
 if($connection->connect_error) die("Cant connect to database!");
 else echo "Database connected!";
 
-// DEMO MYSQL COMMANDS 
-$sql_getAllDataFromManagerView = "SELECT * FROM view_manager";
 
     function runQueryAndDisplayTables()
     {
-      global $connection,$sql_getAllDataFromManagerView;
-        
+      global $connection;
+      $sql_getAllDataFromManagerView = "SELECT * FROM view_manager";
+
       $result = $connection->query($sql_getAllDataFromManagerView);
 
       displayTable($result);
@@ -23,10 +22,7 @@ $sql_getAllDataFromManagerView = "SELECT * FROM view_manager";
 
 
 
-    function displayTable( $selectStatement ) {
-
-    global $connection;
-    $result = $connection->query($selectStatement);
+    function displayTable($result) {
 
     if (!$result) {
       echo "<h3>No result from table</h3>";
@@ -38,22 +34,14 @@ $sql_getAllDataFromManagerView = "SELECT * FROM view_manager";
     echo "
     <table>
       <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>short description</th>
-        <th>full description</th>
-        <th>price</th>
-        <th>created at</th>
-        <th>updated at</th>
+        <th>Employee</th>
+        <th>Employee Department</th>
+        <th>Manager</th>
+        <th>Manager Department</th>
       </tr>";
     while(  $rowdata !== null ){
       
       echo "<tr>";
-
-      // $valCount = count($rowdata);
-      // for( $i = 0; $valCount < $i; $i++ ){
-      // echo "<td>$rowdata[$i]</td>" ;
-      // } 
 
       foreach( $rowdata as $key => $value ){
           echo "<td>$value</td>" ;
