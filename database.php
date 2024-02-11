@@ -1,13 +1,20 @@
 <?php
-// $server ="localhost";
-// $username = "root";
-// $password = "";
-// $database = "IT6LDB"; //change this with your db name
-// require('mysqli');
-$connection = new mysqli("localhost", "root", "", "IT6LDB");
+  /**
+   * @var $connection can be a bool(false) if connection to db failed
+   * or an instance of a mysqli connection 
+  */
+  $connection;
 
-if($connection->connect_error) die("Cant connect to database!");
-else echo "Database connected!";
+    try {
+      $connection = new mysqli("localhost", "root", "", "IT6LDB");
+    } catch (Exception $e) {
+
+    $connection = false;
+      echo "mysqli connection invalid. something went wrong";
+    }
+
+    if($connection->connect_error) die("Cant connect to database!");
+    else echo "Database connected!";
 
 
     function runQueryAndDisplayTables()
@@ -53,3 +60,17 @@ else echo "Database connected!";
 
     echo "</table>";
     }
+
+    function convertDataToOption($result)
+    {
+
+      $rowdata = mysqli_fetch_row($result);
+      
+      while(  $rowdata !== null ){
+        foreach ($rowdata as $key => $value) {
+          echo "<option value=$value>$value</option>";
+        }
+        $rowdata = mysqli_fetch_row($result);
+      }
+    }
+        
