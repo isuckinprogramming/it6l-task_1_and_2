@@ -65,9 +65,6 @@
         // I don't know how a debugger works in php so this is how I will try 
         // to debug errors and monitor variable status during runtime  
         // echo $sql_dummyEmployeeInsert;
-  
-
-
         try {
           $queryResult = $connection->query($sql_dummyEmployeeInsert);
 
